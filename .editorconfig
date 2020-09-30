@@ -41,8 +41,9 @@ indent_size = 4
 indent_style = space
 indent_size = 4
 
-[Makefile]
+[{Makefile,go.mod,go.sum,*.go,.gitmodules}]
 indent_style = tab
+indent_size = 8
 
 # ** Below section from: **
 # https://gist.github.com/NickCraver/3c7fd53e329f7477e17154168025c446
