@@ -129,3 +129,8 @@ function emptytrash -d 'Empty the Trash on all mounted volumes and the main HDD.
     rm -rfv ~/Library/Caches/com.spotify.client/Data
     rm -rfv ~/Library/Caches/Firefox/Profiles/98ne80k7.dev-edition-default/cache2
 end
+
+ # Jetbrains product launchers
+ function mine -d 'Override Rubymine launcher'
+     bash -c "mine $argv"
+ end
