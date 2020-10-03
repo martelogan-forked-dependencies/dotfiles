@@ -25,7 +25,7 @@ source ~/.config/fish/conf.d/scmpuff.fish
 
 # for bash things not checked into git..
 if test -e "$HOME/.extra";
-	source ~/.extra
+	bass source ~/.extra
 end
 
 
