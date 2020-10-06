@@ -128,11 +128,6 @@ brew tap caskroom/versions
 brew install python
 brew install python3
 
-# Install ruby-build and rbenv
-brew install rbenv ruby-build rbenv-default-gems rbenv-gemset
-LINE='eval "$(rbenv init -)"'
-grep -q "$LINE" ~/.extra || echo "$LINE" >> ~/.extra
-
 # Java
 brew tap AdoptOpenJDK/openjdk
 brew cask install adoptopenjdk/openjdk/adoptopenjdk8
