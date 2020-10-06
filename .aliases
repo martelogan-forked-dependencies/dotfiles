@@ -146,3 +146,6 @@ alias reload="exec ${SHELL} -l"
 
 # Print each PATH entry on a separate line
 alias path="echo $PATH | tr ':' '\n'"
+
+# 2020: jetbrains changed mine cli to rubymine...
+alias mine=rubymine
