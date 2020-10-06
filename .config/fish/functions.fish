@@ -132,5 +132,5 @@ end
 
  # Jetbrains product launchers
  function mine -d 'Override Rubymine launcher'
-     bash -c "mine $argv"
+     bash -c "rubymine $argv"
  end
