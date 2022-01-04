@@ -24,7 +24,7 @@ brew install findutils
 brew install gnu-sed
 # Install a modern version of Bash.
 brew install bash
-brew install bash-completion2
+brew install bash-completion@2
 
 # Switch to using brew-installed bash as default shell
 if ! fgrep -q "${BREW_PREFIX}/bin/bash" /etc/shells; then
@@ -34,14 +34,14 @@ if ! fgrep -q "${BREW_PREFIX}/bin/bash" /etc/shells; then
   fi;
 fi;
 
-# Install `wget` with IRI support.
-brew install wget --with-iri
+# Install `wget`
+brew install wget
 
 # Install GnuPG to enable PGP-signing commits.
 brew install gnupg
 
 # Install more recent versions of some macOS tools.
-brew install vim --with-override-system-vi
+brew install vim
 brew install grep
 # # OPTIONAL: below can cause issues on Mac
 # brew install openssh
@@ -56,7 +56,6 @@ brew install sfnt2woff-zopfli
 brew install woff2
 
 # Install some CTF tools; see https://github.com/ctfs/write-ups.
-brew install aircrack-ng
 brew install bfg
 brew install binutils
 brew install binwalk
@@ -78,7 +77,6 @@ brew install tcpflow
 brew install tcpreplay
 brew install tcptrace
 brew install ucspi-tcp # `tcpserver` etc.
-brew install homebrew/x11/xpdf
 brew install xz
 
 # Install other useful binaries.
@@ -87,7 +85,7 @@ brew install ack
 brew install git
 brew install git-lfs
 brew install gs
-brew install imagemagick --with-webp
+brew install imagemagick
 brew install lua
 brew install lynx
 brew install p7zip
@@ -104,12 +102,12 @@ brew install zopfli
 
 # ** Fish compatability **
 
-# Install fzf
-brew install fzf
-$(brew --prefix)/opt/fzf/install
-
 # Install grc
 brew install grc
+
+# Install fzf
+brew install fzf
+$(brew --prefix)/opt/fzf/install --all
 
 # ** Programming **
 # largely from https://github.com/donnemartin/dev-setup/blob/master/brew.sh
@@ -120,9 +118,9 @@ brew install git-extras
 brew install hub
 
 # Cask
-brew tap caskroom/cask
+brew tap homebrew/cask
 brew install brew-cask-completion
-brew tap caskroom/versions
+brew tap homebrew/cask-versions
 
 # Install Python
 brew install python
@@ -130,8 +128,8 @@ brew install python3
 
 # Java
 brew tap AdoptOpenJDK/openjdk
-brew cask install adoptopenjdk/openjdk/adoptopenjdk8
-brew cask install adoptopenjdk/openjdk/adoptopenjdk11
+brew install --cask adoptopenjdk/openjdk/adoptopenjdk8
+brew install --cask adoptopenjdk/openjdk/adoptopenjdk11
 
 brew install jenv
 
@@ -147,7 +145,7 @@ brew link libxslt --force
 # Misc
 brew install pkg-config libffi
 brew install pandoc
+brew install vips
 
 # Remove outdated versions from the cellar.
 brew cleanup
-brew cask cleanup
