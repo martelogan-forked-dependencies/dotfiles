@@ -6,7 +6,7 @@
 [subrepo]
 	remote = https://github.com/mathiasbynens/dotfiles
 	branch = master
-	commit = 5368015b53467949c36f1e386582ac066b0d0ae6
-	parent = 322b2a60041cd426d17406d4d08c16e0681c93fe
+	commit = c886e139233320e29fd882960ba3dd388d57afd7
+	parent = ef4293d07a2c29a835d5410a644c9a6ca063a3bd
 	method = merge
-	cmdver = 0.4.0
+	cmdver = 0.4.3
