@@ -44,10 +44,20 @@ function md --wraps mkdir -d "Create a directory and cd into it"
 end
 
 function gz --d "Get the gzipped size"
-  echo "orig size    (bytes): "
-  cat "$argv[1]" | wc -c | gnumfmt --grouping
-  echo "gzipped size (bytes): "
-  gzip -c "$argv[1]" | wc -c | gnumfmt --grouping
+  printf "%-20s %12s\n"  "compression method"  "bytes"
+  printf "%-20s %'12.0f\n"  "original"         (cat "$argv[1]" | wc -c)
+  
+  # -5 is what GH pages uses, dunno about others
+  # fwiw --no-name is equivalent to catting into gzip
+  printf "%-20s %'12.0f\n"  "gzipped (-5)"     (cat "$argv[1]" | gzip -5 -c | wc -c)
+  printf "%-20s %'12.0f\n"  "gzipped (--best)" (cat "$argv[1]" | gzip --best -c | wc -c)
+  
+  # brew install brotli to get these as well
+  if hash brotli
+  # googlenews uses about -5, walmart serves --best 
+  printf "%-20s %'12.0f\n"  "brotli (-q 5)"    (cat "$argv[1]" | brotli -c --quality=5 | wc -c)
+  printf "%-20s %'12.0f\n"  "brotli (--best)"  (cat "$argv[1]" | brotli -c --best | wc -c)
+  end
 end
 
 function sudo!!
@@ -58,10 +68,6 @@ end
 # `shellswitch [bash|zsh|fish]`
 function shellswitch
 	chsh -s (brew --prefix)/bin/$argv
-end
-
-function code
-  env VSCODE_CWD="$PWD" open -n -b "com.microsoft.VSCodeInsiders" --args $argv
 end
 
 function upgradeyarn
@@ -80,23 +86,14 @@ function fuck -d 'Correct your previous console command'
     end
 end
 
-function server -d 'Start a HTTP server in the current dir, optionally specifying the port'
+# requires my excellent `npm install -g statikk`
+function server -d 'Start a HTTP server in the current dir, optionally specifying the port'    
     if test $argv[1]
         set port $argv[1]
+        statikk --open --port "$port"
     else
-        set port 8000
+        statikk --open
     end
-
-    open "http://localhost:$port/" &
-    # Set the default Content-Type to `text/plain` instead of `application/octet-stream`
-    # And serve everything as UTF-8 (although not technically correct, this doesn’t break anything for binary files)
-#     python -c "import SimpleHTTPServer
-# map = SimpleHTTPServer.SimpleHTTPRequestHandler.extensions_map;
-# map[\"\"] = \"text/plain\";
-# for key, value in map.items():
-#   map[key] = value + \";charset=UTF-8\";
-#   SimpleHTTPServer.test()" $port
-    statikk --port "$port" .
 end
 
 
@@ -108,4 +105,12 @@ function emptytrash -d 'Empty the Trash on all mounted volumes and the main HDD.
     rm -rfv "~/Library/Application Support/Spotify/PersistentCache/Update/*.tbz"
     rm -rfv ~/Library/Caches/com.spotify.client/Data
     rm -rfv ~/Library/Caches/Firefox/Profiles/98ne80k7.dev-edition-default/cache2
+end
+
+function cond -d 'initialize conda'
+  # >>> conda initialize >>>
+  # !! Contents within this block are managed by 'conda init' !!
+  eval /opt/miniconda3/bin/conda "shell.fish" "hook" $argv | source
+  # <<< conda initialize <<<
+  conda activate py2
 end

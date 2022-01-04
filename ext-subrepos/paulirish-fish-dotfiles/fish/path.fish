@@ -9,6 +9,10 @@ set -l PATH_DIRS (cat "$HOME/.extra" | grep "^PATH" | \
 
 set -l PA ""
 
+
+# corp git
+set PA $PA "/usr/local/git/current/bin"
+
 for entry in (string split \n $PATH_DIRS)
     # resolve the {$HOME} substitutions
     set -l resolved_path (eval echo $entry)
@@ -42,6 +46,10 @@ end
 
 # GO
 set PA $PA "/Users/paulirish/.go/bin"
+
+# `code` binary from VS Code insiders
+set PA $PA "/Applications/Visual Studio Code - Insiders.app/Contents/Resources/app/bin"
+
 
 # Google Cloud SDK.
 if test -f "$HOME/google-cloud-sdk/path.fish.inc"

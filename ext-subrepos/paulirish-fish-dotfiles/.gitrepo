@@ -6,7 +6,7 @@
 [subrepo]
 	remote = https://github.com/paulirish/dotfiles.git
 	branch = master
-	commit = dd33151fcea1431706e4faabef5539f99c6ed379
-	parent = 8159483017c3b0b001a6d928f78119e793db8d59
+	commit = 64c695666981866c8067d218181055c26bd355cd
+	parent = ff1401103070c02a9a7dd775f2dbbc0d0182283e
 	method = merge
-	cmdver = 0.4.0
+	cmdver = 0.4.3

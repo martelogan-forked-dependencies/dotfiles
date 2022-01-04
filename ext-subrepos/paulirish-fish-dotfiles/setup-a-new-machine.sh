@@ -17,9 +17,7 @@ cd ~/migration
 
 # what is worth reinstalling?
 brew leaves              > brew-list.txt    # all top-level brew installs
-brew cask list           > cask-list.txt
 npm list -g --depth=0    > npm-g-list.txt
-yarn global ls --depth=0 > yarn-g-list.txt
 
 # then compare brew-list to what's in `brew.sh`
 #   comm <(sort brew-list.txt) <(sort brew.sh-cleaned-up)
@@ -127,9 +125,10 @@ fi
 ##############################################################################################################
 ### homebrew!
 
-# (if your machine has /usr/local locked down (like google's), you can do this to place everything in ~/.homebrew
-mkdir $HOME/.homebrew && curl -L https://github.com/mxcl/homebrew/tarball/master | tar xz --strip 1 -C $HOME/.homebrew
-export PATH=$HOME/.homebrew/bin:$HOME/.homebrew/sbin:$PATH
+# (if your machine has /usr/local locked down (like google's), you can do this to place everything in ~/homebrew
+mkdir $HOME/homebrew && curl -L https://github.com/Homebrew/brew/tarball/master | tar xz --strip 1 -C $HOME/homebrew
+export PATH=$HOME/homebrew/bin:$HOME/homebrew/sbin:$PATH
+# maybe you still need an LD_LIBRARY export thing
 
 # install all the things
 ./brew.sh
@@ -149,6 +148,9 @@ export PATH=$HOME/.homebrew/bin:$HOME/.homebrew/sbin:$PATH
 # the `push` command which copies the github compare URL to my clipboard is heaven
 bash < <( curl https://raw.github.com/jamiew/git-friendly/master/install.sh)
 
+# autocompletion for git branch names https://git-scm.com/book/en/v1/Git-Basics-Tips-and-Tricks
+curl https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash -o ~/.git-completion.bash
+
 
 # Type `git open` to open the GitHub page or website for a repository.
 npm install -g git-open
@@ -156,18 +158,19 @@ npm install -g git-open
 # fancy listing of recent branches
 npm install -g git-recent
 
-# sexy git diffs
-npm install -g diff-so-fancy
-
 # trash as the safe `rm` alternative
 npm install --global trash-cli
+
+# more readable git diffs
+npm install --global diff-so-fancy
+
+# my preferred statik webserver
+npm install -g statikk
 
 # install better nanorc config
 # https://github.com/scopatz/nanorc
 curl https://raw.githubusercontent.com/scopatz/nanorc/master/install.sh | sh
 
-# github.com/rupa/z   - oh how i love you
-git clone https://github.com/rupa/z.git ~/code/z
 # consider reusing your current .z file if possible. it's painful to rebuild :)
 # z is hooked up in .bash_profile
 
@@ -205,14 +208,19 @@ echo $BASH_VERSION # should be 4.x not the old 3.2.X
 # setting up the sublime symlink
 ln -sf "/Applications/Sublime Text.app/Contents/SharedSupport/bin/subl" ~/bin/subl
 
+# install nvm (Node Version Nanager, https://github.com/nvm-sh/nvm)
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.34.0/install.sh | bash
+
 
 ###
 ##############################################################################################################
 
 
+## Chromium hacking
 
 # improve perf of git inside of chromium checkout
-# https://chromium.googlesource.com/chromium/src/+/master/docs/mac_build_instructions.md
+
+# read https://chromium.googlesource.com/chromium/src/+/master/docs/mac_build_instructions.md
 
 # default is (257*1024)
 sudo sysctl kern.maxvnodes=$((512*1024))
@@ -224,22 +232,25 @@ sudo sysctl -w kern.maxfilesperproc=$((1024*1024))
 echo kern.maxfiles=$((10*1024*1024)) | sudo tee -a /etc/sysctl.conf
 echo kern.maxfilesperproc=$((1024*1024)) | sudo tee -a /etc/sysctl.conf
 
+# also it looks like there's still a session limit thx to ulimit.
+# this sets file descriptor max (per shell session above 256). (see `man ulimit`)
+ulimit -n 98304 # same as ulimit -n $((1024*1024))
+# see https://gist.github.com/tombigel/d503800a282fcadbee14b537735d202c for how this will stick around.......
+
 
 # speed up git status (to run only in chromium repo)
 git config status.showuntrackedfiles no
 git update-index --untracked-cache
 
+# faster git server communication.
+# like a LOT faster. https://opensource.googleblog.com/2018/05/introducing-git-protocol-version-2.html
+git config protocol.version 2
 
-# !! EHHH. to be honest i tried this and it seems to be slow me down. 
-# use watchman with git 2.17 for src changes
-# https://blog.github.com/2018-04-05-git-217-released/#speeding-up-status-with-watchman
-#    brew install watchman
-#    cd ~/chromium/src
-#    curl -o .git/hooks/query-watchman https://raw.githubusercontent.com/git/git/master/templates/hooks--fsmonitor-watchman.sample
-#    git config core.fsmonitor .git/hooks/query-watchman
+# see also "A Chromium Compiling Setup for DevTools Hackers"
+# https://gist.github.com/paulirish/2d84a6db1b41b4020685
 
 # also this unrelated thing
-git config user.email "paulirish@chromium.org"
+# git config user.email "xxxx@chromium.org"
 
 
 ##############################################################################################################
@@ -251,9 +262,9 @@ git config user.email "paulirish@chromium.org"
 # prezto and antigen communties also have great stuff
 #   github.com/sorin-ionescu/prezto/blob/master/modules/utility/init.zsh
 
-# set up osx defaults
-#   maybe something else in here https://github.com/hjuutilainen/dotfiles/blob/master/bin/osx-user-defaults.sh
-sh .osx
+# set up macos defaults
+#   maybe something else in here https://github.com/hjuutilainen/dotfiles/tree/master/bin
+sh .macos
 
 # setup and run Rescuetime!
 
