@@ -1,0 +1,12 @@
+; DO NOT EDIT (unless you know what you are doing)
+;
+; This subdirectory is a git "subrepo", and this file is maintained by the
+; git-subrepo command. See https://github.com/git-commands/git-subrepo#readme
+;
+[subrepo]
+	remote = https://github.com/paulirish/pure.git
+	branch = edits
+	commit = f0ba8b99449f6dd564dd7098884737199a7bb46e
+	parent = be3768bd52dee5813ec90d75c12ecf9dee932e21
+	method = merge
+	cmdver = 0.4.3
