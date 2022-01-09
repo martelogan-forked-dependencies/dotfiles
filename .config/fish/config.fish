@@ -9,7 +9,13 @@ if not type -q bass
     exec bash -c "exit" && exit
 end
 
-source /usr/local/etc/grc.fish
+if test -e "/usr/local/etc/grc.fish";
+    source /usr/local/etc/grc.fish
+end
+
+if test -e "/opt/homebrew/etc/grc.fish";
+    source /opt/homebrew/etc/grc.fish
+end
 
 bass source ~/.path
 bass source ~/.exports
