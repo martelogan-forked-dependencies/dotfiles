@@ -50,10 +50,6 @@ fi
 echo ""
 echo ""
 
-fish -c "omf install grc"
-
-fish -c "$(brew --prefix)/opt/fzf/install --all"
-
 if [ "$1" == "--force" -o "$1" == "-f" ]; then
 	doIt;
 else
@@ -65,6 +61,11 @@ else
 fi;
 unset doIt;
 
+fish -c "$(brew --prefix)/opt/fzf/install --all"
+
 fish -c "if not type -q fisher; curl https://git.io/fisher --create-dirs -sLo ~/.config/fish/functions/fisher.fish; end"
 
+fish -c "if not type -q z; fisher add grc; end"
+
 fish -c "if not type -q z; fisher add jethrokuan/z; end"
+

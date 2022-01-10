@@ -98,17 +98,6 @@ brew install tree
 brew install vbindiff
 brew install zopfli
 
-# CUSTOM INSTALLS
-
-# ** Fish compatability **
-
-# Install grc
-brew install grc
-
-# Install fzf
-brew install fzf
-$(brew --prefix)/opt/fzf/install --all
-
 # ** Programming **
 # largely from https://github.com/donnemartin/dev-setup/blob/master/brew.sh
 
