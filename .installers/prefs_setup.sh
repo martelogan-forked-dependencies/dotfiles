@@ -2,8 +2,7 @@
 
 cd "$(dirname "${BASH_SOURCE}")"/..;
 
-** setup powerline fonts **
-clone
+# ** setup powerline fonts **
 git clone https://github.com/powerline/fonts.git --depth=1
 # install
 cd fonts
