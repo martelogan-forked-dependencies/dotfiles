@@ -128,9 +128,12 @@ brew install python3
 # LINE='if which jenv > /dev/null; then eval "$(jenv init -)"; fi'
 # grep -q "$LINE" ~/.extra || echo "$LINE" >> ~/.extra
 
-# technically not a brew...keep an eye for issues but sdkman is 2024's preferred Java env tool
+# technically the following are not brews...keep an eye for issues but sdkman is 2024's preferred Java env tool 
+# and zsh is 2024's default macos shell
 curl -s "https://get.sdkman.io" | bash
 source "$HOME/.sdkman/bin/sdkman-init.sh"
+
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
 # Lxml and Libxslt
 brew install libxml2
