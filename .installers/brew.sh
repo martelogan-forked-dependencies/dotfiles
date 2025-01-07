@@ -64,7 +64,7 @@ brew install dex2jar
 brew install dns2tcp
 brew install fcrackzip
 brew install foremost
-brew install hashpump
+# brew install hashpump
 brew install hydra
 brew install john
 brew install knock
@@ -75,7 +75,7 @@ brew install socat
 brew install sqlmap
 brew install tcpflow
 brew install tcpreplay
-brew install tcptrace
+# brew install tcptrace
 brew install ucspi-tcp # `tcpserver` etc.
 brew install xz
 
@@ -107,23 +107,30 @@ brew install git-extras
 brew install hub
 
 # Cask
-brew tap homebrew/cask
+# deprecated taps commented out but preserved for posterity
+# brew tap homebrew/cask 
 brew install brew-cask-completion
-brew tap homebrew/cask-versions
+# brew tap homebrew/cask-versions
 
 # Install Python
 brew install python
 brew install python3
 
 # Java
-brew tap AdoptOpenJDK/openjdk
-brew install --cask adoptopenjdk/openjdk/adoptopenjdk8
-brew install --cask adoptopenjdk/openjdk/adoptopenjdk11
 
-brew install jenv
+# OLD JDK via jenv installation (deprecated casks) preserved as comments for posterity
+# brew tap AdoptOpenJDK/openjdk
+# brew install --cask adoptopenjdk/openjdk/adoptopenjdk8
+# brew install --cask adoptopenjdk/openjdk/adoptopenjdk11
 
-LINE='if which jenv > /dev/null; then eval "$(jenv init -)"; fi'
-grep -q "$LINE" ~/.extra || echo "$LINE" >> ~/.extra
+# brew install jenv
+
+# LINE='if which jenv > /dev/null; then eval "$(jenv init -)"; fi'
+# grep -q "$LINE" ~/.extra || echo "$LINE" >> ~/.extra
+
+# technically not a brew...keep an eye for issues but sdkman is 2024's preferred Java env tool
+curl -s "https://get.sdkman.io" | bash
+source "$HOME/.sdkman/bin/sdkman-init.sh"
 
 # Lxml and Libxslt
 brew install libxml2
